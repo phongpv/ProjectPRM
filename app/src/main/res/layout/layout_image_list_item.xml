@@ -48,4 +48,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_image_volume" />
 
+    <ProgressBar
+        android:id="@+id/image_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/image_itemImage"
+        app:layout_constraintTop_toTopOf="@+id/image_itemImage" />
+
 </android.support.constraint.ConstraintLayout>
