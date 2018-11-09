@@ -27,28 +27,33 @@ public class activity_learn extends AppCompatActivity {
         cardFront = findViewById(R.id.cardFrontImageLearn);
         cardBack = findViewById(R.id.cardBackImageLearn);
 
-        final ImageView imageView = findViewById(R.id.imageViewFront);
-        cardFront = findViewById(R.id.cardFrontImageLearn);
-        imageView.animate().withLayer()
-            .rotationY(90)
-            .setDuration(300)
-            .withEndAction(new Runnable() {
+        if (isFlipped) {
+            cardFront.animate().withLayer()
+                .rotationY(90)
+                .setDuration(400)
+                .withEndAction(new Runnable() {
                     @Override public void run() {
-                if (isFront) {
-                    cardFront.setVisibility(View.GONE);
-                    cardBack.setVisibility(View.VISIBLE);
-                } else {
-                    cardFront.setVisibility(View.VISIBLE);
-                    cardBack.setVisibility(View.GONE);
-                }
-                isFront = !isFront;
-                imageView.setRotationY(-90);
-                imageView.animate().withLayer()
-                    .rotationY(0)
-                    .setDuration(300)
-                    .start();
+                        cardFront.setRotationY(0);
+                        cardFront.setVisibility(View.GONE);
+                        cardBack.setVisibility(View.VISIBLE);
+                        }
                     }
-                }
-            ).start();
+                ).start();
+
+        } else {
+            cardBack.animate().withLayer()
+                .rotationY(90)
+                .setDuration(400)
+                .withEndAction(new Runnable() {
+                   @Override public void run() {
+                       cardBack.setRotationY(0);
+                       cardBack.setVisibility(View.GONE);
+                       cardFront.setVisibility(View.VISIBLE);
+                       }
+                   }
+                ).start();
+
+        }
+        isFlipped = !isFlipped;
     }
 }
