@@ -1,6 +1,7 @@
 package com.example.luxury.projectfinal;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,9 +12,9 @@ import java.util.List;
 
 public class CategoryAdapter extends BaseAdapter {
     private MainActivity mainActivity;
-    private List<String> list;
+    private List<Category> list;
 
-    public CategoryAdapter(MainActivity mainActivity, List<String> list) {
+    public CategoryAdapter(MainActivity mainActivity, List<Category> list) {
         this.mainActivity = mainActivity;
         this.list = list;
     }
@@ -41,8 +42,9 @@ public class CategoryAdapter extends BaseAdapter {
             view = mainActivity.getLayoutInflater().inflate(R.layout.layout_category, null);
             myHolder = new MyHolder();
             myHolder.btnCategory = view.findViewById(R.id.btnCategory);
-            final String item = list.get(position);
-            myHolder.btnCategory.setText(item);
+            final Category item = list.get(position);
+            myHolder.btnCategory.setText(item.getName());
+            myHolder.btnCategory.setBackgroundColor(Color.parseColor(item.getColor()));
             myHolder.btnCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
