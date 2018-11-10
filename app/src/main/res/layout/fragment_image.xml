@@ -6,10 +6,9 @@
     tools:context=".ImageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Image Fragment" />
 
+    <ListView
+        android:id="@+id/listImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>
