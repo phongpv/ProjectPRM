@@ -1,7 +1,10 @@
 package com.example.luxury.projectfinal;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,16 +16,26 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ImageAdapter extends BaseAdapter {
 
     private MainActivity mainActivity;
     private List<Image> imageList;
+    private TextToSpeech textToSpeech;
+    private MyHolder myHolder;
 
-    public ImageAdapter(MainActivity mainActivity, List<Image> imageList){
+    public ImageAdapter(MainActivity mainActivity, List<Image> imageList) {
         this.mainActivity = mainActivity;
         this.imageList = imageList;
+        textToSpeech = new TextToSpeech(mainActivity, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
+        });
     }
 
     @Override
@@ -43,8 +56,7 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        MyHolder myHolder = null;
-        if(view==null){
+        if (view == null) {
             view = mainActivity.getLayoutInflater().inflate(R.layout.layout_image_list_item, null);
             myHolder = new MyHolder();
             myHolder.imageView = view.findViewById(R.id.image_itemImage);
@@ -54,7 +66,7 @@ public class ImageAdapter extends BaseAdapter {
             myHolder.progressBar = view.findViewById(R.id.image_progressBar);
             myHolder.progressBar.setEnabled(true);
             view.setTag(myHolder);
-        }else{
+        } else {
             myHolder = (MyHolder) view.getTag();
         }
 
@@ -65,15 +77,16 @@ public class ImageAdapter extends BaseAdapter {
         myHolder.imageButtonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String utteranceId = UUID.randomUUID().toString();
+                textToSpeech.speak(myHolder.textViewItemName.getText().toString(),
+                        TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
-
 
         return view;
     }
 
-    void loadImage(final MyHolder myHolder, String url){
+    void loadImage(final MyHolder myHolder, String url) {
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -99,11 +112,30 @@ public class ImageAdapter extends BaseAdapter {
         task.execute(url);
     }
 
-    public class MyHolder{
+    public class MyHolder {
         public ImageView imageView;
         public TextView textViewItemName;
         public TextView textViewDes;
         public ImageButton imageButtonVolume;
         public ProgressBar progressBar;
+    }
+
+    // Get list of image.
+    public List<Image> getImageData(DatabaseCreator databaseCreator) {
+        List<Image> imageList = new ArrayList<>();
+        SQLiteDatabase db = databaseCreator.getReadableDatabase();
+        String sql = "SELECT * FROM Image";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            int cateID = cursor.getInt(cursor.getColumnIndex("category_id"));
+            String name = cursor.getString(cursor.getColumnIndex("image_name"));
+            String image_url = cursor.getString(cursor.getColumnIndex("image_url"));
+            String description = cursor.getString(cursor.getColumnIndex("description"));
+            String audio_url = cursor.getString(cursor.getColumnIndex("audio_url"));
+            Image image = new Image(id, cateID, image_url, audio_url, name, description);
+            imageList.add(image);
+        }
+        return imageList;
     }
 }

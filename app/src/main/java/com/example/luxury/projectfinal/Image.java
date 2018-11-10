@@ -4,17 +4,17 @@ public class Image {
     private int id;
     private int categoryId;
     private String imageUrl;
-    private String imageSound;
+    private String audioUrl;
     private String imageName;
     private String description;
 
     public Image(){}
 
-    public Image(int id, int categoryId, String imageUrl, String imageSound, String imageName, String description) {
+    public Image(int id, int categoryId, String imageUrl, String audioUrl, String imageName, String description) {
         this.id = id;
         this.categoryId = categoryId;
         this.imageUrl = imageUrl;
-        this.imageSound = imageSound;
+        this.audioUrl = audioUrl;
         this.imageName = imageName;
         this.description = description;
     }
@@ -43,12 +43,12 @@ public class Image {
         this.imageUrl = imageUrl;
     }
 
-    public String getImageSound() {
-        return imageSound;
+    public String getAudioUrl() {
+        return audioUrl;
     }
 
-    public void setImageSound(String imageSound) {
-        this.imageSound = imageSound;
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
     }
 
     public String getImageName() {
