@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +73,37 @@ public class ImageFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_image, container, false);
         listImage = (ListView) v.findViewById(R.id.listImage);
+        List<Image> images = new ArrayList<>();
+        images.add(new Image(
+                1,
+                3,
+                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "",
+                "Con hổ",
+                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+        images.add(new Image(
+                1,
+                3,
+                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "",
+                "Con hổ",
+                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+        images.add(new Image(
+                1,
+                3,
+                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "",
+                "Con hổ",
+                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+        images.add(new Image(
+                1,
+                3,
+                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "",
+                "Con hổ",
+                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+        ImageAdapter adapter = new ImageAdapter(this, images);
+        listImage.setAdapter(adapter);
         return v;
     }
 

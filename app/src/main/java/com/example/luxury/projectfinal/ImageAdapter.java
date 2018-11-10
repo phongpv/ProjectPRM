@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,15 +23,15 @@ import java.util.UUID;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private MainActivity mainActivity;
+    private Fragment mainActivity;
     private List<Image> imageList;
     private TextToSpeech textToSpeech;
     private MyHolder myHolder;
 
-    public ImageAdapter(MainActivity mainActivity, List<Image> imageList) {
+    public ImageAdapter(Fragment mainActivity, List<Image> imageList) {
         this.mainActivity = mainActivity;
         this.imageList = imageList;
-        textToSpeech = new TextToSpeech(mainActivity, new TextToSpeech.OnInitListener() {
+        textToSpeech = new TextToSpeech(mainActivity.getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
 

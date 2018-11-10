@@ -1,15 +1,11 @@
 package com.example.luxury.projectfinal;
 
-<<<<<<< HEAD
-import android.support.design.widget.TabLayout;
-=======
 import android.app.ActionBar;
 import android.os.UserManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
->>>>>>> master
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
