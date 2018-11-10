@@ -10,22 +10,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ListView listCategoty;
-    List<String> category = new ArrayList<String>();
+    List<Category> category = new ArrayList<Category>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         listCategoty = (ListView) findViewById(R.id.listCategory);
-        category.add("Animal");
-        category.add("Fruit");
-        category.add("Car");
-        category.add("Belongings");
+        category.add(new Category("Động vật", "#F26202"));
+        category.add(new Category("Hoa quả", "#3D698E"));
+        category.add(new Category("Phương tiện giao thông", "#35A2F4"));
+        category.add(new Category("Đồ dùng hàng ngày", "#975B33"));
         CategoryAdapter adapter = new CategoryAdapter(this, category);
         listCategoty.setAdapter(adapter);
-    }
-
-    public class MyHolder {
-
     }
 }

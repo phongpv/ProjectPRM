@@ -1,9 +1,11 @@
 package com.example.luxury.projectfinal;
 
 import android.app.ActionBar;
+import android.os.UserManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -107,7 +109,16 @@ public class TabbarActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return ImageFragment.newInstance();
+                case 1:
+                    return VideoFragment.newInstance();
+                case 2:
+                    return FlashCardFragment.newInstance();
+                default:
+                    return null;
+            }
         }
 
         @Override
