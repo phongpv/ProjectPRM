@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_itemImage"
+        android:layout_width="125dp"
+        android:layout_height="141dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
+
+    <TextView
+        android:id="@+id/image_textViewItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Item name"
+        android:textSize="30dp"
+        app:layout_constraintStart_toEndOf="@+id/image_itemImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image_textViewDescription"
+        android:layout_width="239dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:text="Description for the item"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_itemImage"
+        app:layout_constraintStart_toEndOf="@+id/image_itemImage" />
+
+    <ImageButton
+        android:id="@+id/image_imageButtonVolume"
+        android:layout_width="48dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/actionModeBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_image_volume" />
+
+    <ProgressBar
+        android:id="@+id/image_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/image_itemImage"
+        app:layout_constraintTop_toTopOf="@+id/image_itemImage" />
+
+</android.support.constraint.ConstraintLayout>
