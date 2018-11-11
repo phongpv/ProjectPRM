@@ -33,7 +33,10 @@
         android:layout_height="92dp"
         android:layout_marginStart="8dp"
         android:text="Description for the item"
-        android:textSize="25dp"
+        android:textSize="15dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/image_itemImage"
         app:layout_constraintStart_toEndOf="@+id/image_itemImage" />
 
