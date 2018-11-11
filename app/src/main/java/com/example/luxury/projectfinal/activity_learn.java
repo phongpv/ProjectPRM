@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +38,9 @@ public class activity_learn extends AppCompatActivity {
         imageViewFront = findViewById(R.id.imageViewFront);
         cardTextAnswer = findViewById(R.id.cardTextAnswer);
         textDescription = findViewById(R.id.textDescription);
+
+        cardFront = findViewById(R.id.cardFrontImageLearn);
+        cardBack = findViewById(R.id.cardBackImageLearn);
         // init data for first time
         setData(data.get(index));
     }
@@ -56,6 +61,12 @@ public class activity_learn extends AppCompatActivity {
     // go next
     void learnGoNext (View v) {
         if (index < data.size()-1) {
+
+            if (!isFlipped) {
+                cardBack.setVisibility(View.GONE);
+                cardFront.setVisibility(View.VISIBLE);
+            }
+            isFlipped = true;
             index++;
             setData(data.get(index));
         }
@@ -64,6 +75,11 @@ public class activity_learn extends AppCompatActivity {
     // go previous
     void learnGoPrevious (View v) {
         if (index > 0) {
+            if (!isFlipped) {
+                cardBack.setVisibility(View.GONE);
+                cardFront.setVisibility(View.VISIBLE);
+            }
+            isFlipped = true;
             index--;
             setData(data.get(index));
         }
@@ -72,8 +88,6 @@ public class activity_learn extends AppCompatActivity {
 
     // flip card view
     void flipCard(View v) {
-        cardFront = findViewById(R.id.cardFrontImageLearn);
-        cardBack = findViewById(R.id.cardBackImageLearn);
 
         if (isFlipped) {
             cardFront.animate().withLayer()
