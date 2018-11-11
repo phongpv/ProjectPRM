@@ -14,7 +14,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ListView listCategoty;
     List<Category> category = new ArrayList<Category>();
-    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +28,4 @@ public class MainActivity extends AppCompatActivity {
         listCategoty.setAdapter(adapter);
     }
 
-//    void callLearnActivity (View v) {
-//        intent = new Intent(this, activity_learn.class);
-//        startActivity(intent);
-//        finish();
-//    }
 }

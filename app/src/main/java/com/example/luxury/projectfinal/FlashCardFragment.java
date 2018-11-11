@@ -114,7 +114,7 @@ public class FlashCardFragment extends Fragment {
         if (isFlipped) {
             cardFront.animate().withLayer()
             .rotationY(90)
-            .setDuration(400)
+            .setDuration(300)
             .withEndAction(new Runnable() {
                 @Override public void run() {
                     cardFront.setRotationY(0);
@@ -124,7 +124,7 @@ public class FlashCardFragment extends Fragment {
         } else {
             cardBack.animate().withLayer()
                 .rotationY(90)
-                .setDuration(400)
+                .setDuration(300)
                 .withEndAction(new Runnable() {
                     @Override public void run() {
                         cardBack.setRotationY(0);

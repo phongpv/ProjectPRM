@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_learn"></activity>
         <activity
             android:name=".TabbarActivity"
             android:label="@string/title_activity_tabbar"
