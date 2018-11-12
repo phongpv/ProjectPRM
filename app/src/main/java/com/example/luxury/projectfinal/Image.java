@@ -6,18 +6,18 @@ public class Image {
     private int id;
     private int categoryId;
     private String imageUrl;
-    private String audioUrl;
+    private String hint;
     private String imageName;
     private String description;
     private Drawable drawable;
 
     public Image(){}
 
-    public Image(int id, int categoryId, String imageUrl, String audioUrl, String imageName, String description) {
+    public Image(int id, int categoryId, String imageUrl, String hint, String imageName, String description) {
         this.id = id;
         this.categoryId = categoryId;
         this.imageUrl = imageUrl;
-        this.audioUrl = audioUrl;
+        this.hint = hint;
         this.imageName = imageName;
         this.description = description;
     }
@@ -46,12 +46,12 @@ public class Image {
         this.imageUrl = imageUrl;
     }
 
-    public String getAudioUrl() {
-        return audioUrl;
+    public String getHint() {
+        return hint;
     }
 
-    public void setAudioUrl(String audioUrl) {
-        this.audioUrl = audioUrl;
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public String getImageName() {
