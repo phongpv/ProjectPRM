@@ -184,6 +184,12 @@ public class FlashCardFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
+        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
+        });
     }
 
     @Override
@@ -191,16 +197,6 @@ public class FlashCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_flash_card, container, false);
-
-        if (!isAdded()) {
-            textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-                @Override
-                public void onInit(int status) {
-
-                }
-            });
-        }
-
 
         Intent intent = getActivity().getIntent();
         String category = intent.getStringExtra("category");
