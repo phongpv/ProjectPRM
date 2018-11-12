@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class FlashCardFragment extends Fragment {
     ImageView imageViewFront;
     TextView cardTextAnswer, textDescription;
     ArrayList<Learn> data = new ArrayList<>();
-    ImageButton goNext, goPrevious;
+    ImageButton goNext, goPrevious, speaker;
     int index = 1;
 
     public FlashCardFragment() {
@@ -164,6 +165,7 @@ public class FlashCardFragment extends Fragment {
 
         goNext = v.findViewById(R.id.imageButtonLeft);
         goPrevious = v.findViewById(R.id.imageButton);
+        speaker = v.findViewById(R.id.iconSoundLearn);
 
         goNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +191,13 @@ public class FlashCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 flipCard();
+            }
+        });
+
+        speaker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("aa", "aa");
             }
         });
 //        // init data for first time

@@ -7,8 +7,7 @@
     android:orientation="vertical"
     android:weightSum="2.5"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity_learn">
+    android:layout_height="match_parent">
 
 
     // card view section
@@ -77,6 +76,28 @@
                     android:textStyle="bold"
                     android:textColor="#008080"
                     />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/iconSoundLearn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="learnGoPrevious"
+                    android:src="@mipmap/ic_learn_speak" />
 
             </LinearLayout>
 
