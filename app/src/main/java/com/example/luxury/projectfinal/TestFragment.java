@@ -190,7 +190,7 @@ public class TestFragment extends Fragment {
                     }).show();
                 }else {
                     builder.setTitle("Thông báo")
-                    .setMessage("Bạn nói sai rồi hãy nói lại nhé!")
+                    .setMessage("Bạn nói sai rồi hãy nói lại nhé! Đáp án đúng là: "+ images.get(index).getImageName())
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // continue with delete
