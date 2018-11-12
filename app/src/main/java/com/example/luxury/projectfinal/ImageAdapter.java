@@ -1,18 +1,22 @@
 package com.example.luxury.projectfinal;
 
+import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +30,6 @@ public class ImageAdapter extends BaseAdapter {
     private Fragment mainActivity;
     private List<Image> imageList;
     private TextToSpeech textToSpeech;
-    private MyHolder myHolder;
 
     public ImageAdapter(Fragment mainActivity, List<Image> imageList) {
         this.mainActivity = mainActivity;
@@ -55,8 +58,9 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
+        MyHolder myHolder;
         if (view == null) {
             view = mainActivity.getLayoutInflater().inflate(R.layout.layout_image_list_item, null);
             myHolder = new MyHolder();
@@ -74,12 +78,18 @@ public class ImageAdapter extends BaseAdapter {
         Image image = imageList.get(position);
         myHolder.textViewItemName.setText(image.getImageName());
         myHolder.textViewDes.setText(image.getDescription());
-        loadImage(myHolder, image.getImageUrl());
+        myHolder.textViewDes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnItemClick(position);
+            }
+        });
+        loadImage(myHolder, image.getImageUrl(), position);
         myHolder.imageButtonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String utteranceId = UUID.randomUUID().toString();
-                textToSpeech.speak(myHolder.textViewItemName.getText().toString(),
+                textToSpeech.speak(imageList.get(position).getImageName(),
                         TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
@@ -87,7 +97,7 @@ public class ImageAdapter extends BaseAdapter {
         return view;
     }
 
-    void loadImage(final MyHolder myHolder, String url) {
+    void loadImage(final MyHolder myHolder, String url, final int position) {
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -107,7 +117,14 @@ public class ImageAdapter extends BaseAdapter {
             protected void onPostExecute(Object o) {
                 Drawable drawable = (Drawable) o;
                 myHolder.imageView.setImageDrawable(drawable);
-                myHolder.progressBar.setEnabled(false);
+                myHolder.progressBar.setVisibility(View.INVISIBLE);
+                imageList.get(position).setDrawable(drawable);
+                myHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
             }
         };
         task.execute(url);
@@ -121,22 +138,22 @@ public class ImageAdapter extends BaseAdapter {
         public ProgressBar progressBar;
     }
 
-    // Get list of image.
-    public List<Image> getImageData(DatabaseCreator databaseCreator) {
-        List<Image> imageList = new ArrayList<>();
-        SQLiteDatabase db = databaseCreator.getReadableDatabase();
-        String sql = "SELECT * FROM Image";
-        Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            int cateID = cursor.getInt(cursor.getColumnIndex("category_id"));
-            String name = cursor.getString(cursor.getColumnIndex("image_name"));
-            String image_url = cursor.getString(cursor.getColumnIndex("image_url"));
-            String description = cursor.getString(cursor.getColumnIndex("description"));
-            String audio_url = cursor.getString(cursor.getColumnIndex("audio_url"));
-            Image image = new Image(id, cateID, image_url, audio_url, name, description);
-            imageList.add(image);
-        }
-        return imageList;
+    void OnItemClick(int position){
+        final Dialog dialog = new Dialog(mainActivity.getContext());
+        Image i = imageList.get(position);
+        dialog.setContentView(R.layout.image_dialog);
+        ImageView imageView = dialog.findViewById(R.id.image_dialog_imageView);
+        imageView.setImageDrawable(i.getDrawable());
+        TextView textView = dialog.findViewById(R.id.image_dialog_textView);
+        textView.setText(i.getDescription());
+        textView.setMovementMethod(new ScrollingMovementMethod());
+        Button button = dialog.findViewById(R.id.image_dialog_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

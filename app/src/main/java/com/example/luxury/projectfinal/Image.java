@@ -1,5 +1,7 @@
 package com.example.luxury.projectfinal;
 
+import android.graphics.drawable.Drawable;
+
 public class Image {
     private int id;
     private int categoryId;
@@ -7,6 +9,7 @@ public class Image {
     private String audioUrl;
     private String imageName;
     private String description;
+    private Drawable drawable;
 
     public Image(){}
 
@@ -65,5 +68,13 @@ public class Image {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Drawable getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
     }
 }
