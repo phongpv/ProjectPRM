@@ -1,7 +1,10 @@
 package com.example.luxury.projectfinal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
@@ -14,9 +17,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -48,6 +55,7 @@ public class FlashCardFragment extends Fragment {
     CardView cardFront, cardBack;
     ImageView imageViewFront;
     TextView cardTextAnswer, textDescription;
+    ProgressBar image_progressBar;
     List<Image> data = new ArrayList<>();
     ImageButton goNext, goPrevious, speaker;
     private TextToSpeech textToSpeech;
@@ -74,10 +82,36 @@ public class FlashCardFragment extends Fragment {
 //        fragment.setArguments(args);
         return fragment;
     }
+
+    void loadImage(String url, final ImageView imageView) {
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                InputStream is = null;
+                String url = objects[0].toString();
+                try {
+                    is = (InputStream) new URL(url).getContent();
+                    Drawable d = Drawable.createFromStream(is, null);
+                    return d;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                Drawable drawable = (Drawable) o;
+                imageView.setImageDrawable(drawable);
+                image_progressBar.setVisibility(View.INVISIBLE);
+            }
+        };
+        task.execute(url);
+    }
     // set data
     void setData(Image image) {
         if (!image.getImageUrl().equals("")) {
-            imageViewFront.setImageResource(R.drawable.blackdog);
+            loadImage(image.getImageUrl(), imageViewFront);
             if (!image.getImageName().equals("")) {
                 cardTextAnswer.setText(image.getImageName().toString());
             }
@@ -164,7 +198,10 @@ public class FlashCardFragment extends Fragment {
             }
         });
 
-        data = DatabaseEditor.getImageData(MainActivity.databaseCreator, 4);
+
+        Intent intent = getActivity().getIntent();
+        String category = intent.getStringExtra("category");
+        data = GetData.getDataByCategory(category);
 
         imageViewFront = v.findViewById(R.id.imageViewFront);
         cardTextAnswer = v.findViewById(R.id.cardTextAnswer);
@@ -176,6 +213,8 @@ public class FlashCardFragment extends Fragment {
         goNext = v.findViewById(R.id.imageButtonLeft);
         goPrevious = v.findViewById(R.id.imageButton);
         speaker = v.findViewById(R.id.iconSoundLearn);
+
+        image_progressBar = (ProgressBar) v.findViewById(R.id.image_progressBar_learn);
 
         goNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +251,7 @@ public class FlashCardFragment extends Fragment {
                         TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
-//        // init data for first time
+        // init data for first time
         setData(data.get(index));
         return v;
     }
