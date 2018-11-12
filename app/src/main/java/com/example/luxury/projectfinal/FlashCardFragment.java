@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -46,7 +48,7 @@ public class FlashCardFragment extends Fragment {
     CardView cardFront, cardBack;
     ImageView imageViewFront;
     TextView cardTextAnswer, textDescription;
-    ArrayList<Learn> data = new ArrayList<>();
+    List<Image> data = new ArrayList<>();
     ImageButton goNext, goPrevious, speaker;
     private TextToSpeech textToSpeech;
     int index = 1;
@@ -73,14 +75,14 @@ public class FlashCardFragment extends Fragment {
         return fragment;
     }
     // set data
-    void setData(Learn learn) {
-        if (!learn.getUrl().equals("")) {
+    void setData(Image image) {
+        if (!image.getImageUrl().equals("")) {
             imageViewFront.setImageResource(R.drawable.blackdog);
-            if (!learn.getName().equals("")) {
-                cardTextAnswer.setText(learn.getName().toString());
+            if (!image.getImageName().equals("")) {
+                cardTextAnswer.setText(image.getImageName().toString());
             }
-            if (!learn.getDescription().equals("")) {
-                textDescription.setText(learn.getDescription().toString());
+            if (!image.getDescription().equals("")) {
+                textDescription.setText(image.getDescription().toString());
             }
         }
     }
@@ -162,19 +164,7 @@ public class FlashCardFragment extends Fragment {
             }
         });
 
-        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int res = textToSpeech.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
-
-        data.add(new Learn("@drawable/blackdog", "Con cho", "Con vật mà rất trung thành với chủ nhân 1.", 1));
-        data.add(new Learn("@drawable/blackdog", "Con cho1", "Con vật mà rất trung thành với chủ nhân 2.", 1));
-        data.add(new Learn("@drawable/blackdog", "Con cho2", "Con vật mà rất trung thành với chủ nhân 3.", 1));
-        data.add(new Learn("@drawable/blackdog", "Con cho3", "Con vật mà rất trung thành với chủ nhân 4.", 1));
+        data = DatabaseEditor.getImageData(MainActivity.databaseCreator, 4);
 
         imageViewFront = v.findViewById(R.id.imageViewFront);
         cardTextAnswer = v.findViewById(R.id.cardTextAnswer);
@@ -218,7 +208,7 @@ public class FlashCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String utteranceId = UUID.randomUUID().toString();
-                textToSpeech.speak(data.get(index).getName().toString(),
+                textToSpeech.speak(data.get(index).getImageName().toString(),
                         TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
