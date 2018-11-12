@@ -1,6 +1,8 @@
 package com.example.luxury.projectfinal;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,62 +78,63 @@ public class ImageFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_image, container, false);
         listImage = (ListView) v.findViewById(R.id.listImage);
         List<Image> images = new ArrayList<>();
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ 1",
-                "11 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ 2",
-                "22 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ 3",
-                "33 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ 4",
-                "444 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ",
-                "Hổ sống trong rừng rậm.ssss s Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ",
-                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ",
-                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ 999",
-                "999 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ 1",
+//                "11 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ 2",
+//                "22 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ 3",
+//                "33 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ 4",
+//                "444 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ",
+//                "Hổ sống trong rừng rậm.ssss s Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ",
+//                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ",
+//                "Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+//        images.add(new Image(
+//                1,
+//                3,
+//                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//                "",
+//                "Con hổ 999",
+//                "999 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
+        images = DatabaseEditor.getImageData(MainActivity.databaseCreator, 4);
         ImageAdapter adapter = new ImageAdapter(this, images);
         listImage.setAdapter(adapter);
         listImage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -142,6 +145,8 @@ public class ImageFragment extends Fragment {
         });
         return v;
     }
+
+
 
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {

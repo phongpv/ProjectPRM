@@ -24,10 +24,10 @@ public class DatabaseCreator extends SQLiteOpenHelper {
                 "id integer NOT NULL primary key autoincrement," +
                 "category_id INT NOT NULL," +
                 "image_url TEXT NOT NULL," +
-                "image_sound TEXT," +
+                "audio_url TEXT," +
                 "image_name nvarchar(100) NOT NULL," +
+                "english_name varchar(100) NOT NULL," +
                 "description TEXT NOT NULL," +
-                "audio_url TEXT NOT NULL," +
                 "FOREIGN KEY (category_id) REFERENCES Category (id)" +
                 ");";
         db.execSQL(sql);
