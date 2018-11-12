@@ -59,6 +59,7 @@ public class FlashCardFragment extends Fragment {
     List<Image> data = new ArrayList<>();
     ImageButton goNext, goPrevious, speaker;
     private TextToSpeech textToSpeech;
+    private Fragment activ;
     int index = 1;
 
     public FlashCardFragment() {
@@ -191,12 +192,14 @@ public class FlashCardFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_flash_card, container, false);
 
-        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
+        if (!isAdded()) {
+            textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
 
-            }
-        });
+                }
+            });
+        }
 
 
         Intent intent = getActivity().getIntent();
