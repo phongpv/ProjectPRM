@@ -37,7 +37,6 @@ public class ImageAdapter extends BaseAdapter {
         textToSpeech = new TextToSpeech(mainActivity.getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-
             }
         });
     }
@@ -84,7 +83,14 @@ public class ImageAdapter extends BaseAdapter {
                 OnItemClick(position);
             }
         });
-        loadImage(myHolder, image.getImageUrl(), position);
+
+        // If it's possible, get the loaded image instead of load every time the list item is changing
+        Drawable imageDrawable = imageList.get(position).getDrawable();
+        if (imageDrawable == null) {
+            loadImage(myHolder, image.getImageUrl(), position);
+        } else {
+            myHolder.imageView.setImageDrawable(imageDrawable);
+        }
         myHolder.imageButtonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,11 +99,12 @@ public class ImageAdapter extends BaseAdapter {
                         TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
-
         return view;
     }
 
     void loadImage(final MyHolder myHolder, String url, final int position) {
+        myHolder.progressBar.setVisibility(View.VISIBLE);
+        myHolder.imageView.setImageDrawable(null);
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -138,7 +145,7 @@ public class ImageAdapter extends BaseAdapter {
         public ProgressBar progressBar;
     }
 
-    void OnItemClick(int position){
+    void OnItemClick(int position) {
         final Dialog dialog = new Dialog(mainActivity.getContext());
         Image i = imageList.get(position);
         dialog.setContentView(R.layout.image_dialog);
