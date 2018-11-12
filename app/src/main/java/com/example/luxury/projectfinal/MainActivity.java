@@ -26,17 +26,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listCategoty = (ListView) findViewById(R.id.listCategory);
-        category.add(new Category("Động vật", "#F26202"));
-        category.add(new Category("Hoa quả", "#3D698E"));
-        category.add(new Category("Phương tiện giao thông", "#35A2F4"));
-        category.add(new Category("Đồ dùng hàng ngày", "#975B33"));
-        CategoryAdapter adapter = new CategoryAdapter(this, category);
-        listCategoty.setAdapter(adapter);
-
         // Use for test the app, when complete, we will use initData() instead.
         this.deleteDatabase("KidThoughDB");
         databaseCreator = new DatabaseCreator(this, "KidThoughDB", 1);
         DatabaseEditor.insertData(databaseCreator);
+
+        category = DatabaseEditor.getCategoryData(databaseCreator);
+        CategoryAdapter adapter = new CategoryAdapter(this, category);
+        listCategoty.setAdapter(adapter);
     }
 
     void initData() {
