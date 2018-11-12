@@ -66,7 +66,7 @@ public class DatabaseEditor {
 
         // Image.
         String c1 = "category_id";
-        String c2 = "image_url";
+        String c2 = "   image_url";
         String c3 = "audio_url";
         String c4 = "image_name";
         String c5 = "english_name";
