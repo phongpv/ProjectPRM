@@ -1,12 +1,15 @@
 package com.example.luxury.projectfinal;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     ListView listCategoty;
@@ -24,4 +27,5 @@ public class MainActivity extends AppCompatActivity {
         CategoryAdapter adapter = new CategoryAdapter(this, category);
         listCategoty.setAdapter(adapter);
     }
+
 }

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Kid Thought</string>
+    <string name="app_name">ProjectFinal</string>
+    <string name="imageCardLearn">ImageCardLearn</string>
     <string name="title_activity_tabbar">TabbarActivity</string>
     <string name="tab_text_1">Hình ảnh</string>
     <string name="tab_text_2">Video</string>

@@ -4,10 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -31,6 +38,13 @@ public class FlashCardFragment extends Fragment {
 //    private OnFragmentInteractionListener mListener;
 
     TextView textView;
+    boolean isFlipped = true;
+    CardView cardFront, cardBack;
+    ImageView imageViewFront;
+    TextView cardTextAnswer, textDescription;
+    ArrayList<Learn> data = new ArrayList<>();
+    ImageButton goNext, goPrevious;
+    int index = 1;
 
     public FlashCardFragment() {
         // Required empty public constructor
@@ -53,6 +67,73 @@ public class FlashCardFragment extends Fragment {
 //        fragment.setArguments(args);
         return fragment;
     }
+    // set data
+    void setData(Learn learn) {
+        if (!learn.getUrl().equals("")) {
+            imageViewFront.setImageResource(R.drawable.blackdog);
+            if (!learn.getName().equals("")) {
+                cardTextAnswer.setText(learn.getName().toString());
+            }
+            if (!learn.getDescription().equals("")) {
+                textDescription.setText(learn.getDescription().toString());
+            }
+        }
+    }
+
+
+    // go next
+    void learnGoNext () {
+        if (index < data.size()-1) {
+
+            if (!isFlipped) {
+                cardBack.setVisibility(View.GONE);
+                cardFront.setVisibility(View.VISIBLE);
+            }
+            isFlipped = true;
+            index++;
+            setData(data.get(index));
+        }
+    }
+
+    // go previous
+    void learnGoPrevious () {
+        if (index > 0) {
+            if (!isFlipped) {
+                cardBack.setVisibility(View.GONE);
+                cardFront.setVisibility(View.VISIBLE);
+            }
+            isFlipped = true;
+            index--;
+            setData(data.get(index));
+        }
+    }
+
+
+    // flip card view
+    void flipCard() {
+        if (isFlipped) {
+            cardFront.animate().withLayer()
+            .rotationY(90)
+            .setDuration(300)
+            .withEndAction(new Runnable() {
+                @Override public void run() {
+                    cardFront.setRotationY(0);
+                    cardFront.setVisibility(View.GONE);
+                    cardBack.setVisibility(View.VISIBLE);
+                }}).start();
+        } else {
+            cardBack.animate().withLayer()
+                .rotationY(90)
+                .setDuration(300)
+                .withEndAction(new Runnable() {
+                    @Override public void run() {
+                        cardBack.setRotationY(0);
+                        cardBack.setVisibility(View.GONE);
+                        cardFront.setVisibility(View.VISIBLE);
+                }}).start();
+        }
+        isFlipped = !isFlipped;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +149,50 @@ public class FlashCardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_flash_card, container, false);
-        textView = (TextView) v.findViewById(R.id.textView);
-        textView.setText("This is flash cash fragment");
+
+        data.add(new Learn("@drawable/blackdog", "Con cho", "Con vật mà rất trung thành với chủ nhân 1.", 1));
+        data.add(new Learn("@drawable/blackdog", "Con cho1", "Con vật mà rất trung thành với chủ nhân 2.", 1));
+        data.add(new Learn("@drawable/blackdog", "Con cho2", "Con vật mà rất trung thành với chủ nhân 3.", 1));
+        data.add(new Learn("@drawable/blackdog", "Con cho3", "Con vật mà rất trung thành với chủ nhân 4.", 1));
+
+        imageViewFront = v.findViewById(R.id.imageViewFront);
+        cardTextAnswer = v.findViewById(R.id.cardTextAnswer);
+        textDescription = v.findViewById(R.id.textDescription);
+
+        cardFront = v.findViewById(R.id.cardFrontImageLearn);
+        cardBack = v.findViewById(R.id.cardBackImageLearn);
+
+        goNext = v.findViewById(R.id.imageButtonLeft);
+        goPrevious = v.findViewById(R.id.imageButton);
+
+        goNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                learnGoNext();
+            }
+        });
+        goPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                learnGoPrevious();
+            }
+        });
+
+        cardBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipCard();
+            }
+        });
+
+        cardFront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipCard();
+            }
+        });
+//        // init data for first time
+        setData(data.get(index));
         return v;
     }
 
