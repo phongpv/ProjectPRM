@@ -9,6 +9,21 @@ import java.util.List;
 
 public class DatabaseEditor {
 
+    // Get list of category.
+    public static List<Category> getCategoryData(DatabaseCreator databaseCreator) {
+        List<Category> categories = new ArrayList<>();
+        SQLiteDatabase db = databaseCreator.getReadableDatabase();
+        String sql = "SELECT * FROM Category";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex("category_name"));
+            String icon = cursor.getString(cursor.getColumnIndex("category_icon"));
+            Category category = new Category(name, icon);
+            categories.add(category);
+        }
+        return categories;
+    }
+
     // Get list of image.
     public static List<Image> getImageData(DatabaseCreator databaseCreator, int categoryID) {
         List<Image> imageList = new ArrayList<>();
@@ -30,6 +45,24 @@ public class DatabaseEditor {
 
     public static void insertData(DatabaseCreator databaseCreator) {
         SQLiteDatabase db = databaseCreator.getWritableDatabase();
+
+        // Category
+        String categ1 = "category_name";
+        String categ2 = "category_icon";
+        ContentValues data_categ = new ContentValues();
+
+        data_categ.put(categ1, "Động vật");
+        data_categ.put(categ2, "http://static1.bestie.vn/Mlog/Question/201506/eee06904-ecab-4db8-b2f8-624d009a38d6.jpg");
+        db.insert("Category", null, data_categ);
+        data_categ.put(categ1, "Hoa quả");
+        data_categ.put(categ2, "https://previews.123rf.com/images/arcady31/arcady311608/arcady31160800085/62360502-yellow-apple-icon.jpg");
+        db.insert("Category", null, data_categ);
+        data_categ.put(categ1, "Phương tiện");
+        data_categ.put(categ2, "http://ketoan24h.com.vn/wp-content/uploads/2017/03/van-tai-duong-thuy.png");
+        db.insert("Category", null, data_categ);
+        data_categ.put(categ1, "Đồ dùng hàng ngày");
+        data_categ.put(categ2, "http://www.hangnhatbanonline.com/upload/img/category/6492icon440x440.jpeg");
+        db.insert("Category", null, data_categ);
 
         // Image.
         String c1 = "category_id";

@@ -2,12 +2,14 @@
     <string name="app_name">Kid Though</string>
     <string name="imageCardLearn">ImageCardLearn</string>
     <string name="title_activity_tabbar">TabbarActivity</string>
-    <string name="tab_text_1">Image</string>
+    <string name="tab_text_1">Hình ảnh</string>
     <string name="tab_text_2">Video</string>
     <string name="tab_text_3">Flash Card</string>
+    <string name="tab_text_4">Kiểm tra</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-
+    <string name="speech_prompt">Say something…</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

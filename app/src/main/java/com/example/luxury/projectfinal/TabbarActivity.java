@@ -53,6 +53,7 @@ public class TabbarActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -114,6 +115,8 @@ public class TabbarActivity extends AppCompatActivity {
                     return VideoFragment.newInstance();
                 case 2:
                     return FlashCardFragment.newInstance();
+                case 3:
+                    return TestFragment.newInstance();
                 default:
                     return null;
             }
@@ -121,8 +124,8 @@ public class TabbarActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
     }
 }
