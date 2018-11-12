@@ -139,6 +139,7 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="learnGoPrevious"
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/ic_arrow_left" />
             </LinearLayout>
 
@@ -159,6 +160,7 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="learnGoNext"
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/ic_arrow_right_1" />
             </LinearLayout>
         </LinearLayout>

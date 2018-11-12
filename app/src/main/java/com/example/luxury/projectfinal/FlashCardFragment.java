@@ -3,6 +3,7 @@ package com.example.luxury.projectfinal;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.UUID;
 
 
 /**
@@ -45,6 +48,7 @@ public class FlashCardFragment extends Fragment {
     TextView cardTextAnswer, textDescription;
     ArrayList<Learn> data = new ArrayList<>();
     ImageButton goNext, goPrevious, speaker;
+    private TextToSpeech textToSpeech;
     int index = 1;
 
     public FlashCardFragment() {
@@ -151,6 +155,22 @@ public class FlashCardFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_flash_card, container, false);
 
+        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+
+            }
+        });
+
+        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int res = textToSpeech.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
+
         data.add(new Learn("@drawable/blackdog", "Con cho", "Con vật mà rất trung thành với chủ nhân 1.", 1));
         data.add(new Learn("@drawable/blackdog", "Con cho1", "Con vật mà rất trung thành với chủ nhân 2.", 1));
         data.add(new Learn("@drawable/blackdog", "Con cho2", "Con vật mà rất trung thành với chủ nhân 3.", 1));
@@ -197,7 +217,9 @@ public class FlashCardFragment extends Fragment {
         speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("aa", "aa");
+                String utteranceId = UUID.randomUUID().toString();
+                textToSpeech.speak(data.get(index).getName().toString(),
+                        TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
 //        // init data for first time
