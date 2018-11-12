@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -137,27 +138,8 @@ public class ImageAdapter extends BaseAdapter {
         public ProgressBar progressBar;
     }
 
-    // Get list of image.
-    public List<Image> getImageData(DatabaseCreator databaseCreator) {
-        List<Image> imageList = new ArrayList<>();
-        SQLiteDatabase db = databaseCreator.getReadableDatabase();
-        String sql = "SELECT * FROM Image";
-        Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
-            int cateID = cursor.getInt(cursor.getColumnIndex("category_id"));
-            String name = cursor.getString(cursor.getColumnIndex("image_name"));
-            String image_url = cursor.getString(cursor.getColumnIndex("image_url"));
-            String description = cursor.getString(cursor.getColumnIndex("description"));
-            String audio_url = cursor.getString(cursor.getColumnIndex("audio_url"));
-            Image image = new Image(id, cateID, image_url, audio_url, name, description);
-            imageList.add(image);
-        }
-        return imageList;
-    }
-
     void OnItemClick(int position){
-        Dialog dialog = new Dialog(mainActivity.getContext());
+        final Dialog dialog = new Dialog(mainActivity.getContext());
         Image i = imageList.get(position);
         dialog.setContentView(R.layout.image_dialog);
         ImageView imageView = dialog.findViewById(R.id.image_dialog_imageView);
@@ -165,6 +147,13 @@ public class ImageAdapter extends BaseAdapter {
         TextView textView = dialog.findViewById(R.id.image_dialog_textView);
         textView.setText(i.getDescription());
         textView.setMovementMethod(new ScrollingMovementMethod());
+        Button button = dialog.findViewById(R.id.image_dialog_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 }
