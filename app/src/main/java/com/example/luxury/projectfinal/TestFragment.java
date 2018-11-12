@@ -1,7 +1,9 @@
 package com.example.luxury.projectfinal;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -37,8 +39,8 @@ public class TestFragment extends Fragment {
     ProgressBar image_progressBar;
     TextView txtName;
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1001;
-    int index = 1;
-    ArrayList<Image> images = new ArrayList<>();
+    int index = 0;
+    List<Image> images = new ArrayList<>();
     public TestFragment() {
 
     }
@@ -81,6 +83,7 @@ public class TestFragment extends Fragment {
         if (index < images.size()-1) {
             index++;
             loadImage(images.get(index).getImageUrl(), index);
+            txtName.setText("Sound user");
         }
     }
 
@@ -89,6 +92,7 @@ public class TestFragment extends Fragment {
         if (index > 0) {
             index--;
             loadImage(images.get(index).getImageUrl(), index);
+            txtName.setText("Sound user");
         }
     }
 
@@ -111,41 +115,9 @@ public class TestFragment extends Fragment {
 
         checkSound();
 
-        images.add(new Image(
-                1,
-                3,
-                "https://i.imgur.com/HqVuEn4.jpg",
-                "",
-                "Con chó",
-                "Đây là con vật biết trông nhà, và rất trung thành với con người."));
-        images.add(new Image(
-                1,
-                3,
-                "https://i.imgur.com/ig7FgKi.jpg",
-                "",
-                "Con hổ",
-                "22 Hổ sống trong rừng rậm. Thường ở một mình, săn mồi vào ban đêm"));
-        images.add(new Image(
-                1,
-                3,
-                "https://i.imgur.com/AWibkhv.jpg",
-                "",
-                "Con thỏ",
-                "Con vật rất giống loài chuột nhưng to hơn. Có 1 cái tai rất dài và vểnh lên trên. Món ăn khoái khẩu là cà rốt."));
-        images.add(new Image(
-                1,
-                3,
-                "https://i.imgur.com/gQqzWH6.jpg",
-                "",
-                "Con lợn",
-                "Con vật này chỉ biết ăn và ngủ. To, chậm chạp."));
-        images.add(new Image(
-                1,
-                3,
-                "https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-                "",
-                "Con hổ",
-                "Hổ sống trong rừng rậm.ssss s Thường ở một mình, săn mồi vào ban đêm"));
+        Intent intent = getActivity().getIntent();
+        String category = intent.getStringExtra("category");
+        images = GetData.getDataByCategory(category);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,6 +178,25 @@ public class TestFragment extends Fragment {
             if(resultCode == getActivity().RESULT_OK) {
                 ArrayList<String> textMatchList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 txtName.setText(textMatchList.get(0));
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(getContext());
+                if(textMatchList.get(0).equalsIgnoreCase(images.get(index).getImageName())) {
+                    builder.setTitle("Thông báo")
+                    .setMessage("Bạn nói đúng rồi!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    }).show();
+                }else {
+                    builder.setTitle("Thông báo")
+                    .setMessage("Bạn nói sai rồi hãy nói lại nhé!")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                        }
+                    }).show();
+                }
                 // Cac truong hop loi
             } else if (resultCode == RecognizerIntent.RESULT_AUDIO_ERROR){
                 showToastMessage("Audio Error");

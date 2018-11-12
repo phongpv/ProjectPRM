@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:weightSum="2.5"
     android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent">
 
     // card view section
@@ -142,6 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sound user"
+                android:maxLines="1"
                 android:textSize="20sp" />
         </LinearLayout>
 
