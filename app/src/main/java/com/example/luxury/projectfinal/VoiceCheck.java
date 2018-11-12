@@ -68,7 +68,6 @@ public class VoiceCheck extends AppCompatActivity {
     }
 
     //nhan ket qua tra ve
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE)
 
