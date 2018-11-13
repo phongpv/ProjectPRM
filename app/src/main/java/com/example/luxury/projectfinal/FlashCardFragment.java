@@ -117,7 +117,7 @@ public class FlashCardFragment extends Fragment {
                 cardTextAnswer.setText(image.getImageName().toString());
             }
             if (!image.getDescription().equals("")) {
-                textDescription.setText(image.getDescription().toString());
+                textDescription.setText(image.getHint().toString());
             }
         }
     }
