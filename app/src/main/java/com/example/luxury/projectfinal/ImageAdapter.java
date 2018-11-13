@@ -1,8 +1,6 @@
 package com.example.luxury.projectfinal;
 
 import android.app.Dialog;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
@@ -16,28 +14,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class ImageAdapter extends BaseAdapter {
 
-    private Fragment mainActivity;
+    private Fragment fragment;
     private List<Image> imageList;
     private TextToSpeech textToSpeech;
 
-    public ImageAdapter(Fragment mainActivity, List<Image> imageList) {
-        this.mainActivity = mainActivity;
+    public ImageAdapter(Fragment fragment, List<Image> imageList) {
+        this.fragment = fragment;
         this.imageList = imageList;
-        textToSpeech = new TextToSpeech(mainActivity.getContext(), new TextToSpeech.OnInitListener() {
+        textToSpeech = new TextToSpeech(fragment.getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-
             }
         });
     }
@@ -62,7 +57,7 @@ public class ImageAdapter extends BaseAdapter {
         View view = convertView;
         MyHolder myHolder;
         if (view == null) {
-            view = mainActivity.getLayoutInflater().inflate(R.layout.layout_image_list_item, null);
+            view = fragment.getLayoutInflater().inflate(R.layout.layout_image_list_item, null);
             myHolder = new MyHolder();
             myHolder.imageView = view.findViewById(R.id.image_itemImage);
             myHolder.imageButtonVolume = view.findViewById(R.id.image_imageButtonVolume);
@@ -84,7 +79,14 @@ public class ImageAdapter extends BaseAdapter {
                 OnItemClick(position);
             }
         });
-        loadImage(myHolder, image.getImageUrl(), position);
+
+        // If it's possible, get the loaded image instead of load every time the list item is changing
+        Drawable imageDrawable = imageList.get(position).getDrawable();
+        if (imageDrawable == null) {
+            loadImage(myHolder, image.getImageUrl(), position);
+        } else {
+            myHolder.imageView.setImageDrawable(imageDrawable);
+        }
         myHolder.imageButtonVolume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,11 +95,12 @@ public class ImageAdapter extends BaseAdapter {
                         TextToSpeech.QUEUE_FLUSH, null, utteranceId);
             }
         });
-
         return view;
     }
 
     void loadImage(final MyHolder myHolder, String url, final int position) {
+        myHolder.progressBar.setVisibility(View.VISIBLE);
+        myHolder.imageView.setImageDrawable(null);
         AsyncTask task = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -122,7 +125,7 @@ public class ImageAdapter extends BaseAdapter {
                 myHolder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        OnItemClick(position);
                     }
                 });
             }
@@ -138,8 +141,8 @@ public class ImageAdapter extends BaseAdapter {
         public ProgressBar progressBar;
     }
 
-    void OnItemClick(int position){
-        final Dialog dialog = new Dialog(mainActivity.getContext());
+    void OnItemClick(int position) {
+        final Dialog dialog = new Dialog(fragment.getContext());
         Image i = imageList.get(position);
         dialog.setContentView(R.layout.image_dialog);
         ImageView imageView = dialog.findViewById(R.id.image_dialog_imageView);

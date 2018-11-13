@@ -2,14 +2,14 @@ package com.example.luxury.projectfinal;
 
 public class Category {
     private String name;
-    private String color;
+    private String icon;
 
     public Category() {
     }
 
-    public Category(String name, String color) {
+    public Category(String name, String icon) {
         this.name = name;
-        this.color = color;
+        this.icon = icon;
     }
 
     public String getName() {
@@ -20,19 +20,19 @@ public class Category {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    public String getIcon() {
+        return icon;
     }
 
     public void setColor(String color) {
-        this.color = color;
+        this.icon = color;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "name='" + name + '\'' +
-                ", color='" + color + '\'' +
+                ", color='" + icon + '\'' +
                 '}';
     }
 }

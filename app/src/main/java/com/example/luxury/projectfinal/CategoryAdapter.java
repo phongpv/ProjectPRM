@@ -44,11 +44,12 @@ public class CategoryAdapter extends BaseAdapter {
             myHolder.btnCategory = view.findViewById(R.id.btnCategory);
             final Category item = list.get(position);
             myHolder.btnCategory.setText(item.getName());
-            myHolder.btnCategory.setBackgroundColor(Color.parseColor(item.getColor()));
+            myHolder.btnCategory.setBackgroundColor(Color.parseColor("#1AB8BE"));
             myHolder.btnCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mainActivity, TabbarActivity.class);
+                    intent.putExtra("category", item.getName());
                     mainActivity.startActivity(intent);
                 }
             });

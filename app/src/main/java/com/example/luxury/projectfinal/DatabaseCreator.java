@@ -1,6 +1,5 @@
 package com.example.luxury.projectfinal;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,7 +23,7 @@ public class DatabaseCreator extends SQLiteOpenHelper {
                 "id integer NOT NULL primary key autoincrement," +
                 "category_id INT NOT NULL," +
                 "image_url TEXT NOT NULL," +
-                "audio_url TEXT," +
+                "hint TEXT," +
                 "image_name nvarchar(100) NOT NULL," +
                 "english_name varchar(100) NOT NULL," +
                 "description TEXT NOT NULL," +
