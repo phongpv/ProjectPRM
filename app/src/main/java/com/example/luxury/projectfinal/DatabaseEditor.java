@@ -341,12 +341,56 @@ public class DatabaseEditor {
         String col_1 = "category_id";
         String col_2 = "video_url";
         ContentValues data_Video = new ContentValues();
+        //animal
         data_Video.put(col_1, 1);
-        data_Video.put(col_2, "http");
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Mjr9aXCrHbg\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
         db.insert("Video", null, data_Video);
 
         data_Video.put(col_1, 1);
-        data_Video.put(col_2, "http");
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/mL0J54pGFLU\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 1);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/3bRHK07_3Ak\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 1);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RXhD_RdUS40\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 1);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/efwNKAAmtjs\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        //fruit
+        data_Video.put(col_1, 2);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-jMB7s1PRvk\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 2);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/SUlWt-E6qdU\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        //traffic
+        data_Video.put(col_1, 3);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/-UnqJd6S4y4\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 3);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/XUznroapw84\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 3);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/xvb-dnr7txY\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        //belongings
+        data_Video.put(col_1, 4);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/xop7a0VSmE8\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+        db.insert("Video", null, data_Video);
+
+        data_Video.put(col_1, 4);
+        data_Video.put(col_2, "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/R78o-ntREps\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
         db.insert("Video", null, data_Video);
     }
 }

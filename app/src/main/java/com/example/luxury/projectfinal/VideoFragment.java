@@ -4,10 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Vector;
 
 
 /**
@@ -29,7 +33,8 @@ public class VideoFragment extends Fragment {
 //    private String mParam2;
 //
 ////    private OnFragmentInteractionListener mListener;
-    TextView textView;
+    RecyclerView recyclerView;
+    Vector<YoutubeVideo> youtubeVideo = new Vector<YoutubeVideo>();
 
     public VideoFragment() {
         // Required empty public constructor
@@ -56,11 +61,13 @@ public class VideoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 //        textView = (TextView) findViewById(R.id.textView);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
+
     }
 
     @Override
@@ -68,8 +75,10 @@ public class VideoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_video, container, false);
-        textView = (TextView) v.findViewById(R.id.textView);
-        textView.setText("This is video fragment");
+        recyclerView = (RecyclerView) v.findViewById(R.id.view_Recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+
         return v;
     }
 
